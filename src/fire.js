@@ -12,7 +12,8 @@ if( import.meta.env.DEV ) {
 	firebaseConfig = (await import('../secrets.js')).firebaseConfig
 	console.log(firebaseConfig);
 } else {
-	firebaseConfig = import.meta.env.VITE_FIREBASECONFIG
+	console.log('From GitHub:', import.meta.env.VITE_FIREBASECONFIG);
+	firebaseConfig = JSON.parse(import.meta.env.VITE_FIREBASECONFIG)
 }
 
 
