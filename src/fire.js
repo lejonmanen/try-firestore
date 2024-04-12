@@ -4,14 +4,17 @@ import { getFirestore, collection, getDocs } from 'firebase/firestore/lite'
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
-const firebaseConfig = {
-  apiKey: "AIzaSyCuIjPLfRSY6SW84FhaE0DPUN-CqynN4Fk",
-  authDomain: "try-out-8cfa5.firebaseapp.com",
-  projectId: "try-out-8cfa5",
-  storageBucket: "try-out-8cfa5.appspot.com",
-  messagingSenderId: "747150806854",
-  appId: "1:747150806854:web:ce029593307de933891f47"
-};
+// console.log(import.meta.env.VITE_X);
+// let poop = import.meta.env.VITE_FIREBASECONFIG.replaceAll('\\"', '"')
+// console.log(poop);
+let firebaseConfig
+if( import.meta.env.DEV ) {
+	firebaseConfig = (await import('../secrets.js')).firebaseConfig
+	console.log(firebaseConfig);
+} else {
+	firebaseConfig = import.meta.env.VITE_FIREBASECONFIG
+}
+
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
